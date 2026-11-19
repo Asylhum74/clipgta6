@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ClipGTA6 – Authorization</title>
+<style>
+  body{font-family:system-ui,Segoe UI,Arial,sans-serif;max-width:760px;margin:40px auto;padding:0 16px;line-height:1.6;color:#1a1a2e;background:#fff}
+  h1{color:#6a2cff}
+  code{display:block;word-break:break-all;background:#f3effc;border:1px solid #d9ccff;border-radius:8px;padding:12px;font-size:15px}
+  button{margin-top:12px;padding:10px 18px;border:0;border-radius:8px;background:#6a2cff;color:#fff;font-size:15px;cursor:pointer}
+  .err{color:#c0003a}
+</style>
+</head>
+<body>
+<h1>ClipGTA6</h1>
+<div id="out">Loading…</div>
+<script>
+  var p = new URLSearchParams(location.search), out = document.getElementById('out');
+  if (p.get('code')) {
+    out.innerHTML = '<p>Authorization successful. Copy this code and paste it back into ClipGTA6:</p>' +
+      '<code id="c"></code><button onclick="navigator.clipboard.writeText(document.getElementById(\'c\').textContent);this.textContent=\'Copied ✓\'">Copy</button>';
+    document.getElementById('c').textContent = p.get('code');
+  } else if (p.get('error')) {
+    out.innerHTML = '<p class="err">Authorization failed: <span id="e"></span></p>';
+    document.getElementById('e').textContent = p.get('error') + ' ' + (p.get('error_description') || '');
+  } else {
+    out.textContent = 'This page receives the TikTok authorization code for ClipGTA6.';
+  }
+</script>
+</body>
+</html>
